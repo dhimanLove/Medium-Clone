@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mediumm/Home/for_you.dart'; // Assuming this is the correct path
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -9,13 +10,14 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin {
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 4, vsync: this, initialIndex: 0);
+    _tabController = TabController(length: 5, vsync: this, initialIndex: 0);
   }
 
   @override
@@ -34,693 +36,421 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
         title: Text(
           'Home',
           style: GoogleFonts.roboto(
-            textStyle: TextStyle(
-              fontSize: 24,
+            textStyle: const TextStyle(
+              fontSize: 26,
               color: Colors.white,
+              fontWeight: FontWeight.w700,
             ),
           ),
         ),
         actions: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Row(
               children: [
                 IconButton(
-                  icon: const Icon(
-                    Icons.light_mode,
-                    color: Color(0xB3FFFFFF),
-                  ),
-                  onPressed: () {
-                    Get.changeTheme(ThemeData.light());
-                  },
+                  icon: const Icon(Icons.light_mode, color: Colors.white70),
+                  onPressed: () => Get.changeTheme(ThemeData.light()),
                   tooltip: 'Switch to Light Mode',
                 ),
-                const SizedBox(width: 10),
                 IconButton(
-                  icon: const Icon(
-                    Icons.dark_mode,
-                    color: Color(0xB3FFFFFF),
-                  ),
-                  onPressed: () {
-                    Get.changeTheme(ThemeData.dark());
-                  },
+                  icon: const Icon(Icons.dark_mode, color: Colors.white70),
+                  onPressed: () => Get.changeTheme(ThemeData.dark()),
                   tooltip: 'Switch to Dark Mode',
                 ),
               ],
             ),
-          )
+          ),
         ],
-        bottom: TabBar(
-          dividerColor: Colors.white12,
-          controller: _tabController,
-          indicatorColor: Colors.white70,
-          labelPadding: const EdgeInsets.symmetric(horizontal: 10),
-          labelStyle: TextStyle(color: Color(0xB3FFFFFF)),
-          unselectedLabelStyle: TextStyle(color: Color(0xB3FFFFFF)),
-          tabs: const [
-            Tab(
-              icon: Icon(
-                Icons.add,
-                color: Color(0xB3FFFFFF),
-              ),
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(48),
+          child: TabBar(
+            controller: _tabController,
+            indicatorColor: Colors.blueAccent,
+            indicatorWeight: 4,
+            labelColor: Colors.white,
+            unselectedLabelColor: Colors.grey[600],
+            labelStyle: GoogleFonts.roboto(
+              textStyle:
+                  const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
             ),
-            Tab(
-              text: 'For you',
+            unselectedLabelStyle: GoogleFonts.roboto(
+              textStyle:
+                  const TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
             ),
-            Tab(
-              text: 'Following',
-            ),
-            Tab(
-              text: 'Featured',
-            ),
-            Tab(
-              text: 'Space',
-            ),
-          ],
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            tabs: const [
+              Tab(icon: Icon(Icons.add_circle_outline, size: 28)),
+              Tab(text: 'For You'),
+              Tab(text: 'Following'),
+              Tab(text: 'Featured'),
+              Tab(text: 'Space'),
+            ],
+          ),
         ),
       ),
       body: TabBarView(
         controller: _tabController,
-        children: List.generate(
-          4,
-              (index) => ListView(
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        children: [
+          // Tab 1: Add
+          Container(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.blueAccent.withOpacity(0.2),
+                        Colors.black
+                      ],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                    shape: BoxShape.circle,
+                  ),
+                  child:
+                      const Icon(Icons.add, size: 56, color: Colors.blueAccent),
+                ),
+                const SizedBox(height: 28),
+                Text(
+                  'Share Your Thoughts',
+                  style: GoogleFonts.roboto(
+                    textStyle: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  'Write an article, start a discussion, or share an idea',
+                  style: GoogleFonts.roboto(
+                    textStyle: TextStyle(color: Colors.grey[400], fontSize: 16),
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 40),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blueAccent,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 40, vertical: 16),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12)),
+                    elevation: 4,
+                  ),
+                  onPressed: () {},
+                  child: Text(
+                    'Start Creating',
+                    style: GoogleFonts.roboto(
+                      textStyle: const TextStyle(
+                          fontSize: 16, fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          // Tab 2: For You
+          const ForYou(),
+
+          // Tab 3: Following
+          ListView(
+            padding: const EdgeInsets.all(16),
             children: [
-              Card(
-                elevation: 5,
-                margin: const EdgeInsets.only(bottom: 16),
-                child: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                  width: double.infinity,
-                  color: Colors.black87,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Container(
-                            width: 24,
-                            height: 24,
-                            decoration: BoxDecoration(
-                              color: Colors.red,
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                            child: const Center(
-                              child: Icon(
-                                Icons.description,
-                                color: Colors.white,
-                                size: 16,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          Expanded(
-                            child: RichText(
-                              overflow: TextOverflow.ellipsis,
-                              text: const TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text: "In The Writing Cooperative",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                  TextSpan(
-                                    text: ' by Loveraj Dhiman Ji',
-                                    style: TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 16),
-                      const Text(
-                        "I'm a Professional\nEditor and These\nPhrases Tell Me You\nUsed ChatGPT",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                          height: 1.2,
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      const Text(
-                        "AI chatbots were trained on\nnovice writing, and it shows",
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 16,
-                          height: 1.3,
-                        ),
-                      ),
-                      const SizedBox(height: 24),
-                      Row(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                            decoration: BoxDecoration(
-                              color: Colors.amber.withOpacity(0.2),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Row(
-                              children: const [
-                                Icon(
-                                  Icons.star,
-                                  color: Colors.amber,
-                                  size: 14,
-                                ),
-                                SizedBox(width: 4),
-                                Text(
-                                  "Jan 3",
-                                  style: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 12,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(width: 12),
-                          Row(
-                            children: const [
-                              Icon(
-                                Icons.visibility,
-                                color: Colors.grey,
-                                size: 16,
-                              ),
-                              SizedBox(width: 4),
-                              Text(
-                                "25.8K",
-                                style: TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(width: 12),
-                          Row(
-                            children: const [
-                              Icon(
-                                Icons.chat_bubble_outline,
-                                color: Colors.grey,
-                                size: 16,
-                              ),
-                              SizedBox(width: 4),
-                              Text(
-                                "767",
-                                style: TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ],
-                          ),
-                          const Spacer(),
-                          const Icon(
-                            Icons.bookmark_border,
-                            color: Colors.grey,
-                            size: 20,
-                          ),
-                          const SizedBox(width: 16),
-                          const Icon(
-                            Icons.more_vert,
-                            color: Colors.grey,
-                            size: 17,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+              Container(
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Colors.grey[900],
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.2),
+                      blurRadius: 8,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
                 ),
-              ),
-              Card(
-                elevation: 5,
-                margin: const EdgeInsets.only(bottom: 16),
-                child: Container(
-                  width: double.infinity,
-                  color: Colors.black87,
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Container(
-                            width: 24,
-                            height: 24,
-                            decoration: BoxDecoration(
-                              color: Colors.red,
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                            child: const Center(
-                              child: Icon(
-                                Icons.description,
-                                color: Colors.white,
-                                size: 16,
-                              ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        CircleAvatar(
+                          backgroundColor: Colors.blueAccent.withOpacity(0.1),
+                          radius: 20,
+                          child: const Icon(Icons.people,
+                              size: 24, color: Colors.blueAccent),
+                        ),
+                        const SizedBox(width: 16),
+                        Text(
+                          'Following',
+                          style: GoogleFonts.roboto(
+                            textStyle: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
-                          const SizedBox(width: 8),
-                          Expanded(
-                            child: RichText(
-                              overflow: TextOverflow.ellipsis,
-                              text: const TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text: "In The Writing Cooperative",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                  TextSpan(
-                                    text: ' by Loveraj Dhiman Ji',
-                                    style: TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 12),
+                    Text(
+                      'Updates from your network',
+                      style: GoogleFonts.roboto(
+                        textStyle:
+                            TextStyle(color: Colors.grey[400], fontSize: 16),
                       ),
-                      const SizedBox(height: 16),
-                      const Text(
-                        "I'm a Professional\nEditor and These\nPhrases Tell Me You\nUsed ChatGPT",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                          height: 1.2,
+                    ),
+                    const SizedBox(height: 20),
+                    ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: CircleAvatar(
+                        radius: 24,
+                        backgroundColor: Colors.grey[800],
+                        child: const Icon(Icons.person, color: Colors.white),
+                      ),
+                      title: Text(
+                        'Alex Smith',
+                        style: GoogleFonts.roboto(
+                          textStyle: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600),
                         ),
                       ),
-                      const SizedBox(height: 8),
-                      const Text(
-                        "AI chatbots were trained on\nnovice writing, and it shows",
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 16,
-                          height: 1.3,
+                      subtitle: Text(
+                        'Just posted: "New project update..."',
+                        style: GoogleFonts.roboto(
+                          textStyle:
+                              TextStyle(color: Colors.grey[500], fontSize: 14),
                         ),
                       ),
-                      const SizedBox(height: 24),
-                      Row(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                            decoration: BoxDecoration(
-                              color: Colors.amber.withOpacity(0.2),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Row(
-                              children: const [
-                                Icon(
-                                  Icons.star,
-                                  color: Colors.amber,
-                                  size: 14,
-                                ),
-                                SizedBox(width: 4),
-                                Text(
-                                  "Jan 3",
-                                  style: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 12,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(width: 12),
-                          Row(
-                            children: const [
-                              Icon(
-                                Icons.visibility,
-                                color: Colors.grey,
-                                size: 16,
-                              ),
-                              SizedBox(width: 4),
-                              Text(
-                                "25.8K",
-                                style: TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(width: 12),
-                          Row(
-                            children: const [
-                              Icon(
-                                Icons.chat_bubble_outline,
-                                color: Colors.grey,
-                                size: 16,
-                              ),
-                              SizedBox(width: 4),
-                              Text(
-                                "767",
-                                style: TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ],
-                          ),
-                          const Spacer(),
-                          const Icon(
-                            Icons.bookmark_border,
-                            color: Colors.grey,
-                            size: 20,
-                          ),
-                          const SizedBox(width: 16),
-                          const Icon(
-                            Icons.more_vert,
-                            color: Colors.grey,
-                            size: 17,
-                          ),
-                        ],
+                      trailing: IconButton(
+                        icon: const Icon(Icons.favorite_border,
+                            color: Colors.grey),
+                        onPressed: () {},
                       ),
-                    ],
-                  ),
-                ),
-              ),
-              Card(
-                elevation: 5,
-                margin: const EdgeInsets.only(bottom: 16),
-                child: Container(
-                  width: double.infinity,
-                  color: Colors.black87,
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Container(
-                            width: 24,
-                            height: 24,
-                            decoration: BoxDecoration(
-                              color: Colors.red,
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                            child: const Center(
-                              child: Icon(
-                                Icons.description,
-                                color: Colors.white,
-                                size: 16,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          Expanded(
-                            child: RichText(
-                              overflow: TextOverflow.ellipsis,
-                              text: const TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text: "In The Writing Cooperative",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                  TextSpan(
-                                    text: ' by Loveraj Dhiman Ji',
-                                    style: TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 16),
-                      const Text(
-                        "I'm a Professional\nEditor and These\nPhrases Tell Me You\nUsed ChatGPT",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                          height: 1.2,
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      const Text(
-                        "AI chatbots were trained on\nnovice writing, and it shows",
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 16,
-                          height: 1.3,
-                        ),
-                      ),
-                      const SizedBox(height: 24),
-                      Row(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                            decoration: BoxDecoration(
-                              color: Colors.amber.withOpacity(0.2),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Row(
-                              children: const [
-                                Icon(
-                                  Icons.star,
-                                  color: Colors.amber,
-                                  size: 14,
-                                ),
-                                SizedBox(width: 4),
-                                Text(
-                                  "Jan 3",
-                                  style: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 12,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(width: 12),
-                          Row(
-                            children: const [
-                              Icon(
-                                Icons.visibility,
-                                color: Colors.grey,
-                                size: 16,
-                              ),
-                              SizedBox(width: 4),
-                              Text(
-                                "25.8K",
-                                style: TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(width: 12),
-                          Row(
-                            children: const [
-                              Icon(
-                                Icons.chat_bubble_outline,
-                                color: Colors.grey,
-                                size: 16,
-                              ),
-                              SizedBox(width: 4),
-                              Text(
-                                "767",
-                                style: TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ],
-                          ),
-                          const Spacer(),
-                          const Icon(
-                            Icons.bookmark_border,
-                            color: Colors.grey,
-                            size: 20,
-                          ),
-                          const SizedBox(width: 16),
-                          const Icon(
-                            Icons.more_vert,
-                            color: Colors.grey,
-                            size: 17,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Card(
-                elevation: 5,
-                margin: const EdgeInsets.only(bottom: 20),
-                child: Container(
-                  width: double.infinity,
-                  color: Colors.black87,
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Container(
-                            width: 24,
-                            height: 24,
-                            decoration: BoxDecoration(
-                              color: Colors.red,
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                            child: const Center(
-                              child: Icon(
-                                Icons.description,
-                                color: Colors.white,
-                                size: 16,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          Expanded(
-                            child: RichText(
-                              overflow: TextOverflow.ellipsis,
-                              text: const TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text: "In The Writing Cooperative",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                  TextSpan(
-                                    text: ' by Loveraj Dhiman Ji',
-                                    style: TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 16),
-                      const Text(
-                        "I'm a Professional\nEditor and These\nPhrases Tell Me You\nUsed ChatGPT",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                          height: 1.2,
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      const Text(
-                        "AI chatbots were trained on\nnovice writing, and it shows",
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 16,
-                          height: 1.3,
-                        ),
-                      ),
-                      const SizedBox(height: 24),
-                      Row(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                            decoration: BoxDecoration(
-                              color: Colors.amber.withOpacity(0.2),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Row(
-                              children: const [
-                                Icon(
-                                  Icons.star,
-                                  color: Colors.amber,
-                                  size: 14,
-                                ),
-                                SizedBox(width: 4),
-                                Text(
-                                  "Jan 3",
-                                  style: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 12,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(width: 12),
-                          Row(
-                            children: const [
-                              Icon(
-                                Icons.visibility,
-                                color: Colors.grey,
-                                size: 16,
-                              ),
-                              SizedBox(width: 4),
-                              Text(
-                                "25.8K",
-                                style: TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(width: 12),
-                          Row(
-                            children: const [
-                              Icon(
-                                Icons.chat_bubble_outline,
-                                color: Colors.grey,
-                                size: 16,
-                              ),
-                              SizedBox(width: 4),
-                              Text(
-                                "767",
-                                style: TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ],
-                          ),
-                          const Spacer(),
-                          const Icon(
-                            Icons.bookmark_border,
-                            color: Colors.grey,
-                            size: 20,
-                          ),
-                          const SizedBox(width: 16),
-                          const Icon(
-                            Icons.more_vert,
-                            color: Colors.grey,
-                            size: 17,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ],
           ),
-        ),
+
+          // Tab 4: Featured
+          ListView(
+            padding: const EdgeInsets.all(16),
+            children: [
+              Container(
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Colors.grey[900]!, Colors.black87],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  ),
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: Colors.blueAccent.withOpacity(0.1)),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Featured',
+                          style: GoogleFonts.roboto(
+                            textStyle: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          padding: const EdgeInsets.all(6),
+                          decoration: BoxDecoration(
+                            color: Colors.blueAccent.withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: const Icon(Icons.trending_up,
+                              color: Colors.blueAccent, size: 20),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 12),
+                    Text(
+                      'Top stories trending now',
+                      style: GoogleFonts.roboto(
+                        textStyle:
+                            TextStyle(color: Colors.grey[400], fontSize: 16),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.black54,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Row(
+                        children: [
+                          const Icon(Icons.star, color: Colors.amber, size: 24),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'The Rise of AI Writing Tools',
+                                  style: GoogleFonts.roboto(
+                                    textStyle: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                ),
+                                Text(
+                                  '12.5K views • 2h ago',
+                                  style: GoogleFonts.roboto(
+                                    textStyle: TextStyle(
+                                        color: Colors.grey[500], fontSize: 12),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+
+          // Tab 5: Space
+          Container(
+            padding: const EdgeInsets.all(16),
+            color: Colors.black,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Spaces',
+                  style: GoogleFonts.roboto(
+                    textStyle: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 26,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  'Live audio conversations',
+                  style: GoogleFonts.roboto(
+                    textStyle: TextStyle(color: Colors.grey[400], fontSize: 16),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Expanded(
+                  child: ListView(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: Colors.grey[900],
+                          borderRadius: BorderRadius.circular(16),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.2),
+                              blurRadius: 8,
+                              offset: const Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Colors.blueAccent.withOpacity(0.2),
+                                    Colors.black
+                                  ],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                ),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: const Icon(Icons.mic,
+                                  color: Colors.blueAccent, size: 28),
+                            ),
+                            const SizedBox(width: 16),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Tech Talk: AI Innovations',
+                                    style: GoogleFonts.roboto(
+                                      textStyle: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    '15 participants • Live now',
+                                    style: GoogleFonts.roboto(
+                                      textStyle: TextStyle(
+                                          color: Colors.grey[500],
+                                          fontSize: 14),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.blueAccent,
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 10),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8)),
+                              ),
+                              child: Text(
+                                'Join',
+                                style: GoogleFonts.roboto(
+                                  textStyle: const TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

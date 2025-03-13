@@ -19,14 +19,14 @@ class _GoogleNavState extends State<GoogleNav> {
   static const List<Widget> _pages = [
     HomeScreen(),
     Search(),
-    Profile(),
     Saved(),
+    Profile(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:  Colors.grey[900],
+      backgroundColor: Colors.grey[900],
       body: PageView(
         controller: _pageController,
         onPageChanged: _onPageChanged,
@@ -45,10 +45,10 @@ class _GoogleNavState extends State<GoogleNav> {
               rippleColor: Colors.grey[400]!,
               hoverColor: Colors.grey[700]!,
               gap: 8,
-              iconSize: 32,
+              iconSize: 30,
               color: Colors.grey[500],
               tabBackgroundColor: Colors.grey[800]!,
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
               tabs: [
                 GButton(
                   icon: Icons.home,
@@ -64,7 +64,8 @@ class _GoogleNavState extends State<GoogleNav> {
                   iconColor: Colors.transparent,
                   leading: CircleAvatar(
                     backgroundColor: Colors.grey[600],
-                    backgroundImage: NetworkImage('https://cdn2.iconfinder.com/data/icons/male-avatars/256/avatars_accounts___man_male_people_person_wavy_hair_jacket_turtleneck.png'),
+                    backgroundImage: NetworkImage(
+                        'https://cdn2.iconfinder.com/data/icons/male-avatars/256/avatars_accounts___man_male_people_person_wavy_hair_jacket_turtleneck.png'),
                     radius: 16,
                   ),
                 ),
