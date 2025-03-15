@@ -3,7 +3,10 @@ import 'package:get/get.dart';
 import 'dart:io';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mediumm/Home/preview.dart';
 import 'package:mediumm/theme/Apptheme.dart';
+import 'package:flutter_quill/quill_delta.dart' as quill;
+import 'package:flutter_quill/flutter_quill.dart';
 
 class WritingScreen extends StatefulWidget {
   const WritingScreen({super.key});
@@ -13,6 +16,7 @@ class WritingScreen extends StatefulWidget {
 }
 
 class _WritingScreenState extends State<WritingScreen> {
+  final controller = QuillController.basic();
   File? _imageFile;
   final ImagePicker picker = ImagePicker();
 
@@ -26,9 +30,9 @@ class _WritingScreenState extends State<WritingScreen> {
       }
     } catch (e) {
       Get.snackbar('error', 'getting error $e');
-      // Optionally handle the error (e.g., show a snackbar to the user)
     }
   }
+
   late final TextEditingController titlecont;
   late final TextEditingController bodyCont;
   bool _isBold = false;
@@ -37,13 +41,13 @@ class _WritingScreenState extends State<WritingScreen> {
   @override
   void initState() {
     super.initState();
-   titlecont = TextEditingController();
+    titlecont = TextEditingController();
     bodyCont = TextEditingController();
   }
 
   @override
   void dispose() {
-   titlecont.dispose();
+    titlecont.dispose();
     bodyCont.dispose();
     super.dispose();
   }
@@ -54,7 +58,7 @@ class _WritingScreenState extends State<WritingScreen> {
       fontSize: 16,
       height: 1.5,
       fontWeight: _isBold ? FontWeight.bold : FontWeight.normal,
-      fontStyle:isitalic ? FontStyle.italic : FontStyle.normal,
+      fontStyle: isitalic ? FontStyle.italic : FontStyle.normal,
     );
   }
 
@@ -71,7 +75,7 @@ class _WritingScreenState extends State<WritingScreen> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(16.0, 70.0, 16.0, 0),
                   child: TextField(
-                    controller:titlecont,
+                    controller: titlecont,
                     cursorColor: Colors.white70,
                     autocorrect: true,
                     style: GoogleFonts.roboto(
@@ -95,23 +99,8 @@ class _WritingScreenState extends State<WritingScreen> {
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
-                    child: TextField(
-                      controller: bodyCont,
-                      cursorColor: Colors.white70,
-                      textCapitalization: TextCapitalization.sentences,
-                      maxLines: null,
-                      expands: true,
-                      textAlignVertical: TextAlignVertical.top,
-                      style: _getBodyTextStyle(),
-                      decoration: InputDecoration(
-                        hintText: 'Tell your story...',
-                        hintStyle: GoogleFonts.roboto(
-                          color: const Color(0xFF757575),
-                          fontSize: 16,
-                          height: 1.5,
-                        ),
-                        border: InputBorder.none,
-                      ),
+                    child: QuillEditor.basic(
+                      controller: controller,
                     ),
                   ),
                 ),
@@ -135,7 +124,7 @@ class _WritingScreenState extends State<WritingScreen> {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-
+                      Get.to(MediumPreviewScreen());
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF3C3C3C),
@@ -166,61 +155,40 @@ class _WritingScreenState extends State<WritingScreen> {
               bottom: 16.0,
               left: 0,
               right: 0,
-              child: Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    IconButton(
-                      icon: Icon(
-                        Icons.format_bold,
-                        size: 20,
-                        color: _isBold ? Colors.blue : Colors.grey,
-                      ),
-                      onPressed: () {
-                        setState(() => _isBold = !_isBold);
-                      },
-                    ),
-                    IconButton(
-                      icon: Icon(
-                        Icons.format_italic,
-                        size: 20,
-                        color:isitalic ? Colors.blue : Colors.grey,
-                      ),
-                      onPressed: () {
-                        setState(() =>isitalic = ! isitalic);
-                      },
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.format_list_numbered, size: 20),
-                      onPressed: () {
-                        // Add numbered list functionality
-                      },
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.format_quote, size: 20),
-                      onPressed: () {
-                        // Add quote functionality
-                      },
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.format_list_bulleted, size: 20),
-                      onPressed: () {
-                        // Add bulleted list functionality
-                      },
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.link, size: 20),
-                      onPressed: () {
-                        // Add link functionality
-                      },
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.image, size: 20),
-                      onPressed: () {
-                        _pickImage();
-                      },
-                    ),
-                  ],
+              child: QuillToolbar.simple(
+                controller: controller,
+                configurations: QuillSimpleToolbarConfigurations(
+
+                  showBoldButton: true,
+                  //toolbarSize: ,
+                  showItalicButton: true,
+                  showStrikeThrough: true,
+                  //showClearFormat: true,
+                  showListNumbers: true,
+                  showListBullets: true,
+                  showQuote: true,
+                  showLink: true,
+                 // showDividers: true,
+
+                  showColorButton: false,
+                  showBackgroundColorButton: false,
+                  showAlignmentButtons: false,
+                  showLeftAlignment: false,
+                  showCenterAlignment: false,
+                  showRightAlignment: false,
+                  showJustifyAlignment: false,
+                  showHeaderStyle: false,
+                  showListCheck: false,
+                  showCodeBlock: false,
+                  showIndent: false,
+                  showUndo: false,
+                  showRedo: false,
+                  showFontSize: false,
+                  showFontFamily: false,
+                  showSearchButton: false,
+                  showSubscript: false,
+                  showSuperscript: false,
+                  multiRowsDisplay: false,
                 ),
               ),
             ),

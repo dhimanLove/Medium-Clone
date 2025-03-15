@@ -16,7 +16,6 @@ dependencies:
   shimmer:
   google_nav_bar:
   google_fonts:
-  image_gallery_saver:
 
   # State management
   provider:
