@@ -12,7 +12,7 @@ class AppThemes {
       iconTheme: IconThemeData(color: Color(0xFF1A1A1A)),
     ),
     cardTheme: CardTheme(
-       color: Color(0xFF1A1A1A),
+      color: Color(0xFF1A1A1A),
     ),
     textTheme: TextTheme(
       displayLarge: GoogleFonts.roboto(
@@ -37,19 +37,22 @@ class AppThemes {
       ),
     ),
     tabBarTheme: TabBarTheme(
-      indicatorColor: Colors.blueAccent,
+      indicatorColor: Colors.white70,
       indicatorSize: TabBarIndicatorSize.tab,
       labelColor: Color(0xFF1A1A1A),
       unselectedLabelColor: Colors.grey[600],
       labelStyle: GoogleFonts.roboto(fontSize: 14, fontWeight: FontWeight.w600),
-      unselectedLabelStyle: GoogleFonts.roboto(fontSize: 13, fontWeight: FontWeight.w400),
+      unselectedLabelStyle:
+          GoogleFonts.roboto(fontSize: 13, fontWeight: FontWeight.w400),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        foregroundColor: Colors.white,
-        backgroundColor: Colors.blueAccent,
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        backgroundColor: const Color(0xFF3C3C3C),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 0),
+        elevation: 5,
       ),
     ),
     inputDecorationTheme: InputDecorationTheme(
@@ -100,14 +103,18 @@ class AppThemes {
       labelColor: Colors.white,
       unselectedLabelColor: Colors.grey[600],
       labelStyle: GoogleFonts.roboto(fontSize: 14, fontWeight: FontWeight.w600),
-      unselectedLabelStyle: GoogleFonts.roboto(fontSize: 13, fontWeight: FontWeight.w400),
+      unselectedLabelStyle:
+          GoogleFonts.roboto(fontSize: 13, fontWeight: FontWeight.w400),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        foregroundColor: Colors.white,
-        backgroundColor: Colors.blueAccent,
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        backgroundColor: const Color(0xFF3C3C3C),
+        //visualDensity: const VisualDensity(horizontal: 0, vertical: 0),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 0),
+        elevation: 5,
       ),
     ),
     inputDecorationTheme: InputDecorationTheme(

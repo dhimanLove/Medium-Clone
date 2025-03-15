@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mediumm/theme/Apptheme.dart';
+//import 'package:mediumm/theme/Theme-controller.dart';
 
 class AddScreen extends StatefulWidget {
   const AddScreen({super.key});
@@ -9,87 +11,151 @@ class AddScreen extends StatefulWidget {
   State<AddScreen> createState() => _AddScreenState();
 }
 
-class _AddScreenState extends State<AddScreen> with SingleTickerProviderStateMixin {
-  late TabController _tabController;
-  final TextEditingController _blogController = TextEditingController();
+class _AddScreenState extends State<AddScreen> {
+  //final TextEditingController _blogController = TextEditingController();
+  int selectindex = 0;
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 5, vsync: this);
   }
 
-  @override
-  void dispose() {
-    _tabController.dispose();
-    _blogController.dispose();
-    super.dispose();
+  Widget contentoftabbar() {
+    switch (selectindex) {
+      case 0:
+        return Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              Container(
+                height: 60,
+                color: Colors.red,
+              ),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () {},
+                style: AppThemes.darkTheme.elevatedButtonTheme.style,
+                child: Text(
+                  'Submit',
+                  style: AppThemes.darkTheme.textTheme.labelLarge,
+                ),
+              ),
+            ],
+          ),
+        );
+
+      case 1:
+        return Center(
+          child: Text(
+            'For You Content',
+            style: AppThemes.darkTheme.textTheme.bodyLarge,
+          ),
+        );
+
+      case 2:
+        return Center(
+          child: Text(
+            'Following Content',
+            style: AppThemes.darkTheme.textTheme.bodyLarge,
+          ),
+        );
+
+      case 3:
+        return Center(
+          child: Text(
+            'Featured Content',
+            style: AppThemes.darkTheme.textTheme.bodyLarge,
+          ),
+        );
+
+      case 4:
+        return Center(
+          child: Text(
+            'Space Content',
+            style: AppThemes.darkTheme.textTheme.bodyLarge,
+          ),
+        );
+
+      default:
+        return Center(
+          child: Text(
+            'Select an option',
+            style: AppThemes.darkTheme.textTheme.bodyLarge,
+          ),
+        );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     // backgroundColor: Colors.black,
+      backgroundColor: AppThemes.darkTheme.scaffoldBackgroundColor,
       appBar: AppBar(
-       // backgroundColor: Colors.black,
-        leading: const Icon(Icons.arrow_back, color: Colors.white),
+        backgroundColor: AppThemes.darkTheme.appBarTheme.backgroundColor,
+        leading:IconButton(onPressed:(){
+          Get.back();
+        }, icon:  Icon(
+          Icons.arrow_back,
+          color: AppThemes.darkTheme.appBarTheme.iconTheme?.color,
+        ),),
         title: Text(
           'Add Screen',
-          style: GoogleFonts.roboto(
-            color: Colors.white,
+          style: AppThemes.darkTheme.textTheme.displayLarge?.copyWith(
             fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(55),
-          child: TabBar(
-            controller: _tabController,
-            indicatorColor: Colors.blueAccent,
-            indicatorWeight: 4,
-            labelColor: Colors.white,
-            unselectedLabelColor: Colors.grey[600],
-            labelStyle: GoogleFonts.roboto(
-              textStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
-            ),
-            unselectedLabelStyle: GoogleFonts.roboto(
-              textStyle: const TextStyle(fontWeight: FontWeight.w400, fontSize: 13),
-            ),
-            padding: const EdgeInsets.symmetric(horizontal: 0),
-            tabs: [
-              Tab(
-                icon: IconButton(
-                  onPressed: () {
-                    _tabController.animateTo(0); // Stay on the Add tab
-                  },
-                  icon: const Icon(Icons.add, size: 28, color: Colors.white),
-                ),
-              ),
-              const Tab(text: 'For You'),
-              const Tab(text: 'Following'),
-              const Tab(text: 'Featured'),
-              const Tab(text: 'Space'),
-            ],
           ),
         ),
       ),
-      body: TabBarView(
-        controller: _tabController,
+      body: Column(
         children: [
-          // Add Tab: Blog Writing Area
           Padding(
-            padding: const EdgeInsets.all(16.0),
-            child:Container(),
+            padding: const EdgeInsets.symmetric(vertical: 4.0), // Reduced vertical padding
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  tabbutton(0, 'Add'),
+                  tabbutton(1, 'For You'),
+                  tabbutton(2, 'Following'),
+                  tabbutton(3, 'Featured'),
+                  tabbutton(4, 'Space'),
+                ],
+              ),
+            ),
           ),
-          // For You Tab
-          Container(color: Colors.black, child: const Center(child: Text('For You', style: TextStyle(color: Colors.white)))),
-          // Following Tab
-          Container(color: Colors.black, child: const Center(child: Text('Following', style: TextStyle(color: Colors.white)))),
-          // Featured Tab
-          Container(color: Colors.black, child: const Center(child: Text('Featured', style: TextStyle(color: Colors.white)))),
-          // Space Tab
-          Container(color: Colors.black, child: const Center(child: Text('Space', style: TextStyle(color: Colors.white)))),
+          Expanded(
+            child: contentoftabbar(),
+          ),
         ],
+      ),
+    );
+  }
+
+  Widget tabbutton(int index, String label) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+      child: TextButton(
+        onPressed: () {
+          setState(() {
+            selectindex = index;
+          });
+        },
+        child: Text(
+          label,
+          style: GoogleFonts.roboto(
+            color: selectindex == index
+                ? AppThemes.darkTheme.tabBarTheme.labelColor
+                : AppThemes.darkTheme.tabBarTheme.unselectedLabelColor,
+            fontWeight: selectindex == index ? FontWeight.w600 : FontWeight.w400,
+          ),
+        ),
+        style: TextButton.styleFrom(
+          backgroundColor: selectindex == index
+              ? AppThemes.darkTheme.cardColor?.withOpacity(0.1)
+              : Colors.transparent,
+          elevation: 0, // Removed elevation for a flatter look
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8), // Reduced padding
+        ),
       ),
     );
   }

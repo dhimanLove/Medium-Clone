@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mediumm/theme/Apptheme.dart';
 
 class ForYou extends StatefulWidget {
   const ForYou({super.key});
@@ -10,10 +11,10 @@ class ForYou extends StatefulWidget {
 }
 
 class _ForYouState extends State<ForYou> {
-  // Sample data structure for posts
-  final List<Map<String, dynamic>> posts = [
+  final List posts = [
     {
-      'title': "I'm a Professional Editor and These Phrases Tell Me You Used ChatGPT",
+      'title':
+          "I'm a Professional Editor and These Phrases Tell Me You Used ChatGPT",
       'subtitle': "AI chatbots were trained on novice writing, and it shows",
       'source': "The Writing Cooperative",
       'author': "Loveraj Dhiman Ji",
@@ -31,13 +32,76 @@ class _ForYouState extends State<ForYou> {
       'comments': "543",
     },
     {
-      'title': "Mastering Flutter Development",
-      'subtitle': "Tips from senior developers",
-      'source': "Code Central",
-      'author': "Mike Chen",
-      'date': "Mar 1",
-      'views': "32.1K",
-      'comments': "892",
+      'title': "Exploring the Ethics of AI-Generated Art",
+      'subtitle': "A deep dive into the moral implications",
+      'source': "Art & AI Journal",
+      'author': "Emma Rodriguez",
+      'date': "Dec 20",
+      'views': "14.7K",
+      'comments': "321",
+    },
+    {
+      'title': "Building Scalable Apps with Flutter",
+      'subtitle': "Best practices for large-scale development",
+      'source': "Dev Insights",
+      'author': "Alex Carter",
+      'date': "Jan 12",
+      'views': "29.3K",
+      'comments': "678",
+    },
+    {
+      'title': "The Rise of Virtual Reality in Education",
+      'subtitle': "Transforming learning with immersive tech",
+      'source': "EduTech Review",
+      'author': "Priya Sharma",
+      'date': "Feb 28",
+      'views': "22.5K",
+      'comments': "489",
+    },
+    {
+      'title': "Mastering Machine Learning Algorithms",
+      'subtitle': "A beginner's guide to advanced techniques",
+      'source': "AI Academy",
+      'author': "John Lee",
+      'date': "Mar 5",
+      'views': "36.9K",
+      'comments': "912",
+    },
+    {
+      'title': "The Impact of Blockchain on Finance",
+      'subtitle': "Revolutionizing transactions and security",
+      'source': "Finance Innovate",
+      'author': "Michael Brown",
+      'date': "Jan 18",
+      'views': "19.4K",
+      'comments': "345",
+    },
+    {
+      'title': "Designing User-Friendly Mobile Interfaces",
+      'subtitle': "Key principles for modern app design",
+      'source': "UX Magazine",
+      'author': "Lisa Kim",
+      'date': "Feb 10",
+      'views': "15.6K",
+      'comments': "234",
+    },
+    {
+      'title': "The Evolution of Cloud Computing",
+      'subtitle': "Trends shaping the future of storage",
+      'source': "Cloud Tech Weekly",
+      'author': "David Patel",
+      'date': "Mar 8",
+      'views': "27.1K",
+      'comments': "567",
+    },
+    {
+      'title': "Cybersecurity in the Age of AI",
+      'subtitle': "Protecting data with intelligent systems",
+      'source': "Security Digest",
+      'author': "Rachel Nguyen",
+      'date': "Feb 22",
+      'views': "33.8K",
+      'comments': "789",
     },
   ];
 
@@ -52,8 +116,10 @@ class _ForYouState extends State<ForYou> {
           return Padding(
             padding: const EdgeInsets.only(bottom: 16),
             child: Card(
+              color: AppThemes.darkTheme.cardColor,
               elevation: 4,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12)),
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Column(
@@ -140,7 +206,8 @@ class _ForYouState extends State<ForYou> {
                       children: [
                         // Date
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 4),
                           decoration: BoxDecoration(
                             color: Colors.blueAccent.withOpacity(0.1),
                             borderRadius: BorderRadius.circular(12),

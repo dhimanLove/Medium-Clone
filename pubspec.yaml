@@ -9,45 +9,57 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+  # Core UI dependencies
   cupertino_icons:
-  # State management for reactive UI
+  cached_network_image:
+  shimmer:
+  google_nav_bar:
+  google_fonts:
+  image_gallery_saver:
+
+  # State management
   provider:
-  # Networking for API calls (e.g., fetching articles)
+  get:
+
+  # Networking
   http:
-  # Firebase for authentication and backend storage
+
+  # Firebase
   firebase_core:
   firebase_auth:
   cloud_firestore:
-  # Rich text editor for writing articles
+
+  # Content editing
   flutter_quill:
-  # Image picking and uploading (e.g., for article covers)
+  flutter_markdown:
+
+  # Media handling
   image_picker:
-  # Cached network images for smooth loading
-  cached_network_image:
-  shimmer:
-  #ui
-  google_nav_bar:
-  # Animations for a polished UX
+
+  # Animations
   flutter_staggered_animations:
-  # Offline support and local storage
+  flutter_bouncing_widgets:
+
+  # Storage & Offline
   hive:
   hive_flutter:
   get_storage:
-  flutter_bouncing_widgets:
-  get:
-  flutter_markdown:
 
+  # Utilities
   pull_to_refresh:
-  # Creative UI enhancements
-  google_fonts:
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
-  # Build runner for Hive code generation
   build_runner: ^2.4.15
   hive_generator: ^2.0.1
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "lib/Assets/logo.png"
 
 flutter:
   uses-material-design: true

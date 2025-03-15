@@ -17,7 +17,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  final ThemeController themeController = Get.find<ThemeController>(); // Get the controller
+  final ThemeController themeController =
+      Get.find<ThemeController>(); // Get the controller
 
   @override
   void initState() {
@@ -49,12 +50,12 @@ class _HomeScreenState extends State<HomeScreen>
               children: [
                 IconButton(
                   icon: const Icon(Icons.light_mode),
-                  onPressed: () => themeController.switchToLightTheme(), // Use controller
+                  onPressed: () => themeController.switchToLightTheme(),
                   tooltip: 'Switch to Light Mode',
                 ),
                 IconButton(
                   icon: const Icon(Icons.dark_mode),
-                  onPressed: () => themeController.switchToDarkTheme(), // Use controller
+                  onPressed: () => themeController.switchToDarkTheme(),
                   tooltip: 'Switch to Dark Mode',
                 ),
               ],
@@ -68,12 +69,15 @@ class _HomeScreenState extends State<HomeScreen>
             indicatorColor: Colors.blueAccent,
             indicatorWeight: 4,
             labelColor: Theme.of(context).tabBarTheme.labelColor,
-            unselectedLabelColor: Theme.of(context).tabBarTheme.unselectedLabelColor,
+            unselectedLabelColor:
+                Theme.of(context).tabBarTheme.unselectedLabelColor,
             labelStyle: GoogleFonts.roboto(
-              textStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
+              textStyle:
+                  const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
             ),
             unselectedLabelStyle: GoogleFonts.roboto(
-              textStyle: const TextStyle(fontWeight: FontWeight.w400, fontSize: 13),
+              textStyle:
+                  const TextStyle(fontWeight: FontWeight.w400, fontSize: 13),
             ),
             padding: const EdgeInsets.symmetric(horizontal: 0),
             tabs: [
@@ -111,7 +115,6 @@ class _HomeScreenState extends State<HomeScreen>
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 const SizedBox(height: 20),
-
                 const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () {
@@ -121,8 +124,8 @@ class _HomeScreenState extends State<HomeScreen>
                   child: Text(
                     'Post',
                     style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                      color: Colors.white,
-                    ),
+                          color: Colors.white,
+                        ),
                   ),
                 ),
               ],
@@ -153,7 +156,8 @@ class _HomeScreenState extends State<HomeScreen>
                         CircleAvatar(
                           backgroundColor: Colors.blueAccent.withOpacity(0.1),
                           radius: 20,
-                          child: const Icon(Icons.people, size: 24, color: Colors.blueAccent),
+                          child: const Icon(Icons.people,
+                              size: 24, color: Colors.blueAccent),
                         ),
                         const SizedBox(width: 16),
                         Text(
@@ -223,7 +227,8 @@ class _HomeScreenState extends State<HomeScreen>
                             color: Colors.blueAccent.withOpacity(0.1),
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          child: const Icon(Icons.trending_up, color: Colors.blueAccent, size: 20),
+                          child: const Icon(Icons.trending_up,
+                              color: Colors.blueAccent, size: 20),
                         ),
                       ],
                     ),
@@ -304,13 +309,17 @@ class _HomeScreenState extends State<HomeScreen>
                               padding: const EdgeInsets.all(12),
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(
-                                  colors: [Colors.blueAccent.withOpacity(0.2), Colors.black],
+                                  colors: [
+                                    Colors.blueAccent.withOpacity(0.2),
+                                    Colors.black
+                                  ],
                                   begin: Alignment.topLeft,
                                   end: Alignment.bottomRight,
                                 ),
                                 borderRadius: BorderRadius.circular(12),
                               ),
-                              child: const Icon(Icons.mic, color: Colors.blueAccent, size: 28),
+                              child: const Icon(Icons.mic,
+                                  color: Colors.blueAccent, size: 28),
                             ),
                             const SizedBox(width: 16),
                             Expanded(
@@ -319,24 +328,30 @@ class _HomeScreenState extends State<HomeScreen>
                                 children: [
                                   Text(
                                     'Tech Talk: AI Innovations',
-                                    style: Theme.of(context).textTheme.bodyLarge,
+                                    style:
+                                        Theme.of(context).textTheme.bodyLarge,
                                   ),
                                   const SizedBox(height: 4),
                                   Text(
                                     '15 participants • Live now',
-                                    style: Theme.of(context).textTheme.bodyMedium,
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium,
                                   ),
                                 ],
                               ),
                             ),
                             ElevatedButton(
                               onPressed: () {},
-                              style: Theme.of(context).elevatedButtonTheme.style,
+                              style:
+                                  Theme.of(context).elevatedButtonTheme.style,
                               child: Text(
                                 'Join',
-                                style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                                  color: Colors.white,
-                                ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .labelLarge
+                                    ?.copyWith(
+                                      color: Colors.white,
+                                    ),
                               ),
                             ),
                           ],
