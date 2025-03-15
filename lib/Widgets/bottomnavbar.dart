@@ -26,7 +26,7 @@ class _GoogleNavState extends State<GoogleNav> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[900],
+      //backgroundColor: Colors.grey[900],
       body: PageView(
         controller: _pageController,
         onPageChanged: _onPageChanged,
@@ -34,20 +34,20 @@ class _GoogleNavState extends State<GoogleNav> {
       ),
       bottomNavigationBar: SafeArea(
         child: Container(
-          color: Colors.black87,
+          //color: Colors.black87,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
             child: GNav(
               selectedIndex: _selectedIndex,
               onTabChange: _onTabChange,
-              activeColor: Colors.grey[300],
+              //activeColor: Colors.grey[300],
               haptic: true,
-              rippleColor: Colors.grey[400]!,
-              hoverColor: Colors.grey[700]!,
+              //rippleColor: Colors.grey[400]!,
+             // hoverColor: Colors.grey[700]!,
               gap: 8,
               iconSize: 30,
-              color: Colors.grey[500],
-              tabBackgroundColor: Colors.grey[800]!,
+              //color: Colors.grey[500],
+             // tabBackgroundColor: Colors.grey[800]!,
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
               tabs: [
                 GButton(
@@ -63,7 +63,7 @@ class _GoogleNavState extends State<GoogleNav> {
                   icon: Icons.circle,
                   iconColor: Colors.transparent,
                   leading: CircleAvatar(
-                    backgroundColor: Colors.grey[600],
+                    //backgroundColor: Colors.grey[600],
                     backgroundImage: NetworkImage(
                         'https://cdn2.iconfinder.com/data/icons/male-avatars/256/avatars_accounts___man_male_people_person_wavy_hair_jacket_turtleneck.png'),
                     radius: 16,

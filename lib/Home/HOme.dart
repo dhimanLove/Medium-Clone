@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mediumm/Home/for_you.dart'; // Assuming this is the correct path
+import 'package:mediumm/Home/add.dart'; // Your Add class
+import 'package:mediumm/Home/for_you.dart';
+import 'package:mediumm/Widgets/writing.dart'; // Assuming this is correct
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -17,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 5, vsync: this, initialIndex: 0);
+    _tabController = TabController(length: 5, vsync: this, initialIndex: 1);
   }
 
   @override
@@ -29,9 +31,9 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      //backgroundColor: Colors.black,
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        //backgroundColor: Colors.black,
         elevation: 0,
         title: Text(
           'Home',
@@ -63,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen>
           ),
         ],
         bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(48),
+          preferredSize: const Size.fromHeight(55),
           child: TabBar(
             controller: _tabController,
             indicatorColor: Colors.blueAccent,
@@ -76,15 +78,25 @@ class _HomeScreenState extends State<HomeScreen>
             ),
             unselectedLabelStyle: GoogleFonts.roboto(
               textStyle:
-                  const TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
+                  const TextStyle(fontWeight: FontWeight.w400, fontSize: 13),
             ),
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            tabs: const [
-              Tab(icon: Icon(Icons.add_circle_outline, size: 28)),
-              Tab(text: 'For You'),
-              Tab(text: 'Following'),
-              Tab(text: 'Featured'),
-              Tab(text: 'Space'),
+            padding: const EdgeInsets.symmetric(horizontal: 0),
+            tabs: [
+              Tab(
+                icon: IconButton(
+                  onPressed: () {
+                    // Option 1: Navigate to Add screen
+                    Get.to(const AddScreen());
+                    // Option 2: Switch to Add tab (uncomment if preferred)
+                    // _tabController.animateTo(0);
+                  },
+                  icon: const Icon(Icons.add, size: 28, color: Colors.white),
+                ),
+              ),
+              const Tab(text: 'For You'),
+              const Tab(text: 'Following'),
+              const Tab(text: 'Featured'),
+              const Tab(text: 'Space'),
             ],
           ),
         ),
@@ -93,62 +105,63 @@ class _HomeScreenState extends State<HomeScreen>
         controller: _tabController,
         children: [
           // Tab 1: Add
-          Container(
-            padding: const EdgeInsets.all(24),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  padding: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        Colors.blueAccent.withOpacity(0.2),
-                        Colors.black
-                      ],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
-                    shape: BoxShape.circle,
-                  ),
-                  child:
-                      const Icon(Icons.add, size: 56, color: Colors.blueAccent),
-                ),
-                const SizedBox(height: 28),
                 Text(
-                  'Share Your Thoughts',
+                  'Create Something New',
                   style: GoogleFonts.roboto(
                     textStyle: const TextStyle(
                       color: Colors.white,
-                      fontSize: 28,
+                      fontSize: 26,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 12),
                 Text(
-                  'Write an article, start a discussion, or share an idea',
+                  'Start writing or uploading content',
                   style: GoogleFonts.roboto(
                     textStyle: TextStyle(color: Colors.grey[400], fontSize: 16),
                   ),
-                  textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: 40),
+                const SizedBox(height: 20),
+                TextField(
+                  decoration: InputDecoration(
+                    hintText: 'What’s on your mind?',
+                    hintStyle: TextStyle(color: Colors.grey[600]),
+                    filled: true,
+                    fillColor: Colors.grey[900],
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide.none,
+                    ),
+                  ),
+                  style: const TextStyle(color: Colors.white),
+                  maxLines: 4,
+                ),
+                const SizedBox(height: 16),
                 ElevatedButton(
+                  onPressed: () {
+                    // Add your submit logic here
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blueAccent,
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 40, vertical: 16),
+                        horizontal: 20, vertical: 12),
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12)),
-                    elevation: 4,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                   ),
-                  onPressed: () {},
                   child: Text(
-                    'Start Creating',
+                    'Post',
                     style: GoogleFonts.roboto(
                       textStyle: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.w600),
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
                 ),
@@ -451,6 +464,12 @@ class _HomeScreenState extends State<HomeScreen>
             ),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Get.to(WritingScreen());
+        },
+        child: Icon(Icons.add),
       ),
     );
   }
