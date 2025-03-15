@@ -43,8 +43,7 @@ class _ForYouState extends State<ForYou> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.black,
+    return SizedBox(
       child: ListView.builder(
         padding: const EdgeInsets.all(16),
         itemCount: posts.length,
@@ -54,7 +53,6 @@ class _ForYouState extends State<ForYou> {
             padding: const EdgeInsets.only(bottom: 16),
             child: Card(
               elevation: 4,
-              color: Colors.grey[900],
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
               child: Padding(
                 padding: const EdgeInsets.all(16),

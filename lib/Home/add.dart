@@ -29,9 +29,9 @@ class _AddScreenState extends State<AddScreen> with SingleTickerProviderStateMix
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+     // backgroundColor: Colors.black,
       appBar: AppBar(
-        backgroundColor: Colors.black,
+       // backgroundColor: Colors.black,
         leading: const Icon(Icons.arrow_back, color: Colors.white),
         title: Text(
           'Add Screen',

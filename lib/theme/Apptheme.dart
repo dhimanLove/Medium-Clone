@@ -7,28 +7,31 @@ class AppThemes {
     cardColor: Colors.grey[100],
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.white,
-      foregroundColor: Colors.black,
+      foregroundColor: Color(0xFF1A1A1A),
       elevation: 0,
-      iconTheme: IconThemeData(color: Colors.black87),
+      iconTheme: IconThemeData(color: Color(0xFF1A1A1A)),
+    ),
+    cardTheme: CardTheme(
+       color: Color(0xFF1A1A1A),
     ),
     textTheme: TextTheme(
       displayLarge: GoogleFonts.roboto(
-        color: Colors.black,
+        color: Color(0xFF1A1A1A),
         fontSize: 26,
         fontWeight: FontWeight.w700,
       ),
       bodyLarge: GoogleFonts.roboto(
-        color: Colors.black,
+        color: Color(0xFF1A1A1A),
         fontSize: 16,
         fontWeight: FontWeight.w600,
       ),
       bodyMedium: GoogleFonts.roboto(
-        color: Colors.black87,
+        color: Color(0xFF1A1A1A),
         fontSize: 14,
         fontWeight: FontWeight.w400,
       ),
       labelLarge: GoogleFonts.roboto(
-        color: Colors.black,
+        color: Color(0xFF1A1A1A),
         fontSize: 14,
         fontWeight: FontWeight.w600,
       ),
@@ -36,7 +39,7 @@ class AppThemes {
     tabBarTheme: TabBarTheme(
       indicatorColor: Colors.blueAccent,
       indicatorSize: TabBarIndicatorSize.tab,
-      labelColor: Colors.black,
+      labelColor: Color(0xFF1A1A1A),
       unselectedLabelColor: Colors.grey[600],
       labelStyle: GoogleFonts.roboto(fontSize: 14, fontWeight: FontWeight.w600),
       unselectedLabelStyle: GoogleFonts.roboto(fontSize: 13, fontWeight: FontWeight.w400),
@@ -61,10 +64,10 @@ class AppThemes {
   );
 
   static ThemeData darkTheme = ThemeData.dark().copyWith(
-    scaffoldBackgroundColor: Colors.black,
+    scaffoldBackgroundColor: Color(0xFF1A1A1A),
     cardColor: Colors.grey[900],
     appBarTheme: const AppBarTheme(
-      backgroundColor: Colors.black,
+      backgroundColor: Color(0xFF1A1A1A),
       foregroundColor: Colors.white,
       elevation: 0,
       iconTheme: IconThemeData(color: Colors.white70),

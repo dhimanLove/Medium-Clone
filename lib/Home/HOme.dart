@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mediumm/Home/add.dart'; // Your Add class
+import 'package:mediumm/Home/add.dart';
 import 'package:mediumm/Home/for_you.dart';
-import 'package:mediumm/Widgets/writing.dart'; // Assuming this is correct
+import 'package:mediumm/Widgets/writing.dart';
+import 'package:mediumm/theme/Apptheme.dart';
+import 'package:mediumm/theme/Themecontroller.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -15,6 +17,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  final ThemeController themeController = Get.find<ThemeController>(); // Get the controller
 
   @override
   void initState() {
@@ -31,18 +34,12 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //backgroundColor: Colors.black,
       appBar: AppBar(
-        //backgroundColor: Colors.black,
         elevation: 0,
         title: Text(
           'Home',
           style: GoogleFonts.roboto(
-            textStyle: const TextStyle(
-              fontSize: 26,
-              color: Colors.white,
-              fontWeight: FontWeight.w700,
-            ),
+            textStyle: Theme.of(context).textTheme.displayLarge,
           ),
         ),
         actions: [
@@ -51,13 +48,13 @@ class _HomeScreenState extends State<HomeScreen>
             child: Row(
               children: [
                 IconButton(
-                  icon: const Icon(Icons.light_mode, color: Colors.white70),
-                  onPressed: () => Get.changeTheme(ThemeData.light()),
+                  icon: const Icon(Icons.light_mode),
+                  onPressed: () => themeController.switchToLightTheme(), // Use controller
                   tooltip: 'Switch to Light Mode',
                 ),
                 IconButton(
-                  icon: const Icon(Icons.dark_mode, color: Colors.white70),
-                  onPressed: () => Get.changeTheme(ThemeData.dark()),
+                  icon: const Icon(Icons.dark_mode),
+                  onPressed: () => themeController.switchToDarkTheme(), // Use controller
                   tooltip: 'Switch to Dark Mode',
                 ),
               ],
@@ -70,27 +67,22 @@ class _HomeScreenState extends State<HomeScreen>
             controller: _tabController,
             indicatorColor: Colors.blueAccent,
             indicatorWeight: 4,
-            labelColor: Colors.white,
-            unselectedLabelColor: Colors.grey[600],
+            labelColor: Theme.of(context).tabBarTheme.labelColor,
+            unselectedLabelColor: Theme.of(context).tabBarTheme.unselectedLabelColor,
             labelStyle: GoogleFonts.roboto(
-              textStyle:
-                  const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
+              textStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
             ),
             unselectedLabelStyle: GoogleFonts.roboto(
-              textStyle:
-                  const TextStyle(fontWeight: FontWeight.w400, fontSize: 13),
+              textStyle: const TextStyle(fontWeight: FontWeight.w400, fontSize: 13),
             ),
             padding: const EdgeInsets.symmetric(horizontal: 0),
             tabs: [
               Tab(
                 icon: IconButton(
                   onPressed: () {
-                    // Option 1: Navigate to Add screen
                     Get.to(const AddScreen());
-                    // Option 2: Switch to Add tab (uncomment if preferred)
-                    // _tabController.animateTo(0);
                   },
-                  icon: const Icon(Icons.add, size: 28, color: Colors.white),
+                  icon: const Icon(Icons.add, size: 28),
                 ),
               ),
               const Tab(text: 'For You'),
@@ -104,7 +96,6 @@ class _HomeScreenState extends State<HomeScreen>
       body: TabBarView(
         controller: _tabController,
         children: [
-          // Tab 1: Add
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -112,74 +103,39 @@ class _HomeScreenState extends State<HomeScreen>
               children: [
                 Text(
                   'Create Something New',
-                  style: GoogleFonts.roboto(
-                    textStyle: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 26,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  style: Theme.of(context).textTheme.displayLarge,
                 ),
                 const SizedBox(height: 12),
                 Text(
                   'Start writing or uploading content',
-                  style: GoogleFonts.roboto(
-                    textStyle: TextStyle(color: Colors.grey[400], fontSize: 16),
-                  ),
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 const SizedBox(height: 20),
-                TextField(
-                  decoration: InputDecoration(
-                    hintText: 'What’s on your mind?',
-                    hintStyle: TextStyle(color: Colors.grey[600]),
-                    filled: true,
-                    fillColor: Colors.grey[900],
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide.none,
-                    ),
-                  ),
-                  style: const TextStyle(color: Colors.white),
-                  maxLines: 4,
-                ),
+
                 const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: () {
                     // Add your submit logic here
                   },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blueAccent,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 12),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
+                  style: Theme.of(context).elevatedButtonTheme.style,
                   child: Text(
                     'Post',
-                    style: GoogleFonts.roboto(
-                      textStyle: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
+                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                      color: Colors.white,
                     ),
                   ),
                 ),
               ],
             ),
           ),
-
-          // Tab 2: For You
           const ForYou(),
-
-          // Tab 3: Following
           ListView(
             padding: const EdgeInsets.all(16),
             children: [
               Container(
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: Colors.grey[900],
+                  color: Theme.of(context).cardColor,
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [
                     BoxShadow(
@@ -197,29 +153,19 @@ class _HomeScreenState extends State<HomeScreen>
                         CircleAvatar(
                           backgroundColor: Colors.blueAccent.withOpacity(0.1),
                           radius: 20,
-                          child: const Icon(Icons.people,
-                              size: 24, color: Colors.blueAccent),
+                          child: const Icon(Icons.people, size: 24, color: Colors.blueAccent),
                         ),
                         const SizedBox(width: 16),
                         Text(
                           'Following',
-                          style: GoogleFonts.roboto(
-                            textStyle: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 22,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                          style: Theme.of(context).textTheme.displayLarge,
                         ),
                       ],
                     ),
                     const SizedBox(height: 12),
                     Text(
                       'Updates from your network',
-                      style: GoogleFonts.roboto(
-                        textStyle:
-                            TextStyle(color: Colors.grey[400], fontSize: 16),
-                      ),
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     const SizedBox(height: 20),
                     ListTile(
@@ -227,27 +173,18 @@ class _HomeScreenState extends State<HomeScreen>
                       leading: CircleAvatar(
                         radius: 24,
                         backgroundColor: Colors.grey[800],
-                        child: const Icon(Icons.person, color: Colors.white),
+                        child: const Icon(Icons.person),
                       ),
                       title: Text(
                         'Alex Smith',
-                        style: GoogleFonts.roboto(
-                          textStyle: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600),
-                        ),
+                        style: Theme.of(context).textTheme.bodyLarge,
                       ),
                       subtitle: Text(
                         'Just posted: "New project update..."',
-                        style: GoogleFonts.roboto(
-                          textStyle:
-                              TextStyle(color: Colors.grey[500], fontSize: 14),
-                        ),
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       trailing: IconButton(
-                        icon: const Icon(Icons.favorite_border,
-                            color: Colors.grey),
+                        icon: const Icon(Icons.favorite_border),
                         onPressed: () {},
                       ),
                     ),
@@ -256,8 +193,6 @@ class _HomeScreenState extends State<HomeScreen>
               ),
             ],
           ),
-
-          // Tab 4: Featured
           ListView(
             padding: const EdgeInsets.all(16),
             children: [
@@ -265,7 +200,7 @@ class _HomeScreenState extends State<HomeScreen>
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [Colors.grey[900]!, Colors.black87],
+                    colors: [Theme.of(context).cardColor, Colors.black87],
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                   ),
@@ -280,13 +215,7 @@ class _HomeScreenState extends State<HomeScreen>
                       children: [
                         Text(
                           'Featured',
-                          style: GoogleFonts.roboto(
-                            textStyle: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 22,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                          style: Theme.of(context).textTheme.displayLarge,
                         ),
                         Container(
                           padding: const EdgeInsets.all(6),
@@ -294,18 +223,14 @@ class _HomeScreenState extends State<HomeScreen>
                             color: Colors.blueAccent.withOpacity(0.1),
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          child: const Icon(Icons.trending_up,
-                              color: Colors.blueAccent, size: 20),
+                          child: const Icon(Icons.trending_up, color: Colors.blueAccent, size: 20),
                         ),
                       ],
                     ),
                     const SizedBox(height: 12),
                     Text(
                       'Top stories trending now',
-                      style: GoogleFonts.roboto(
-                        textStyle:
-                            TextStyle(color: Colors.grey[400], fontSize: 16),
-                      ),
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     const SizedBox(height: 20),
                     Container(
@@ -324,19 +249,11 @@ class _HomeScreenState extends State<HomeScreen>
                               children: [
                                 Text(
                                   'The Rise of AI Writing Tools',
-                                  style: GoogleFonts.roboto(
-                                    textStyle: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600),
-                                  ),
+                                  style: Theme.of(context).textTheme.bodyLarge,
                                 ),
                                 Text(
                                   '12.5K views • 2h ago',
-                                  style: GoogleFonts.roboto(
-                                    textStyle: TextStyle(
-                                        color: Colors.grey[500], fontSize: 12),
-                                  ),
+                                  style: Theme.of(context).textTheme.bodyMedium,
                                 ),
                               ],
                             ),
@@ -349,30 +266,20 @@ class _HomeScreenState extends State<HomeScreen>
               ),
             ],
           ),
-
-          // Tab 5: Space
           Container(
             padding: const EdgeInsets.all(16),
-            color: Colors.black,
+            color: Theme.of(context).scaffoldBackgroundColor,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   'Spaces',
-                  style: GoogleFonts.roboto(
-                    textStyle: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 26,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  style: Theme.of(context).textTheme.displayLarge,
                 ),
                 const SizedBox(height: 12),
                 Text(
                   'Live audio conversations',
-                  style: GoogleFonts.roboto(
-                    textStyle: TextStyle(color: Colors.grey[400], fontSize: 16),
-                  ),
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 const SizedBox(height: 20),
                 Expanded(
@@ -381,7 +288,7 @@ class _HomeScreenState extends State<HomeScreen>
                       Container(
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
-                          color: Colors.grey[900],
+                          color: Theme.of(context).cardColor,
                           borderRadius: BorderRadius.circular(16),
                           boxShadow: [
                             BoxShadow(
@@ -397,17 +304,13 @@ class _HomeScreenState extends State<HomeScreen>
                               padding: const EdgeInsets.all(12),
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(
-                                  colors: [
-                                    Colors.blueAccent.withOpacity(0.2),
-                                    Colors.black
-                                  ],
+                                  colors: [Colors.blueAccent.withOpacity(0.2), Colors.black],
                                   begin: Alignment.topLeft,
                                   end: Alignment.bottomRight,
                                 ),
                                 borderRadius: BorderRadius.circular(12),
                               ),
-                              child: const Icon(Icons.mic,
-                                  color: Colors.blueAccent, size: 28),
+                              child: const Icon(Icons.mic, color: Colors.blueAccent, size: 28),
                             ),
                             const SizedBox(width: 16),
                             Expanded(
@@ -416,41 +319,23 @@ class _HomeScreenState extends State<HomeScreen>
                                 children: [
                                   Text(
                                     'Tech Talk: AI Innovations',
-                                    style: GoogleFonts.roboto(
-                                      textStyle: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
+                                    style: Theme.of(context).textTheme.bodyLarge,
                                   ),
                                   const SizedBox(height: 4),
                                   Text(
                                     '15 participants • Live now',
-                                    style: GoogleFonts.roboto(
-                                      textStyle: TextStyle(
-                                          color: Colors.grey[500],
-                                          fontSize: 14),
-                                    ),
+                                    style: Theme.of(context).textTheme.bodyMedium,
                                   ),
                                 ],
                               ),
                             ),
                             ElevatedButton(
                               onPressed: () {},
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.blueAccent,
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 10),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8)),
-                              ),
+                              style: Theme.of(context).elevatedButtonTheme.style,
                               child: Text(
                                 'Join',
-                                style: GoogleFonts.roboto(
-                                  textStyle: const TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w600),
+                                style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                                  color: Colors.white,
                                 ),
                               ),
                             ),
@@ -464,12 +349,6 @@ class _HomeScreenState extends State<HomeScreen>
             ),
           ),
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Get.to(WritingScreen());
-        },
-        child: Icon(Icons.add),
       ),
     );
   }

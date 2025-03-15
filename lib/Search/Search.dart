@@ -32,14 +32,14 @@ class _SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      //backgroundColor: Colors.black,
       body: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
             child: SizedBox(height: 50),
           ),
           SliverAppBar(
-            backgroundColor: Colors.black,
+           // backgroundColor: Colors.black,
             elevation: 0,
             pinned: true,
             expandedHeight: 150,

@@ -27,35 +27,19 @@ class _ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
-      floatingActionButton: ClipRect(
-        child: FloatingActionButton(
-          backgroundColor: Colors.green[600],
-          elevation: 4,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-          onPressed: () {},
-          child: const Icon(
-            Icons.edit,
-            color: Colors.white,
-            size: 28,
-          ),
-        ),
-      ),
         body: TabBarView(
           controller: _tabController,
           children: [
             // Stories Tab (Placeholder)
             Container(
-              color: Colors.black,
+              //color: Colors.black,
               child: const Center(
                 child: Text('Stories Content', style: TextStyle(color: Colors.white)),
               ),
             ),
             // Lists Tab (Placeholder)
             Container(
-              color: Colors.black,
+              //color: Colors.black,
               child: const Center(
                 child: Text('Lists Content', style: TextStyle(color: Colors.white)),
               ),

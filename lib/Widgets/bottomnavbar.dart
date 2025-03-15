@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:mediumm/Home/Home.dart';
 import 'package:mediumm/Profile/Profi.dart';
 import 'package:mediumm/Saved/Saved.dart';
 import 'package:mediumm/Search/Search.dart';
+import 'package:mediumm/Widgets/writing.dart';
 
 class GoogleNav extends StatefulWidget {
   const GoogleNav({super.key});
@@ -73,6 +75,14 @@ class _GoogleNavState extends State<GoogleNav> {
             ),
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        shape: CircleBorder(),
+        backgroundColor: Colors.green,
+        onPressed: () {
+          Get.to(WritingScreen());
+        },
+        child:Icon(Icons.edit_note_sharp,size: 30,),
       ),
     );
   }
