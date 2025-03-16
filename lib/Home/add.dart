@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mediumm/Home/add/Muted.dart';
+import 'package:mediumm/Home/add/Suggestion.dart';
+import 'package:mediumm/Home/add/readingHistory.dart';
 import 'package:mediumm/theme/Apptheme.dart';
-//import 'package:mediumm/theme/Theme-controller.dart';
 
 class AddScreen extends StatefulWidget {
   const AddScreen({super.key});
@@ -12,8 +14,7 @@ class AddScreen extends StatefulWidget {
 }
 
 class _AddScreenState extends State<AddScreen> {
-  //final TextEditingController _blogController = TextEditingController();
-  int selectindex = 0;
+  int selectindex = 3;
 
   @override
   void initState() {
@@ -23,63 +24,22 @@ class _AddScreenState extends State<AddScreen> {
   Widget contentoftabbar() {
     switch (selectindex) {
       case 0:
-        return Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              Container(
-                height: 60,
-                color: Colors.red,
-              ),
-              const SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: () {},
-                style: AppThemes.darkTheme.elevatedButtonTheme.style,
-                child: Text(
-                  'Submit',
-                  style: AppThemes.darkTheme.textTheme.labelLarge,
-                ),
-              ),
-            ],
-          ),
-        );
-
-      case 1:
-        return Center(
-          child: Text(
-            'For You Content',
-            style: AppThemes.darkTheme.textTheme.bodyLarge,
-          ),
-        );
-
-      case 2:
         return Center(
           child: Text(
             'Following Content',
             style: AppThemes.darkTheme.textTheme.bodyLarge,
           ),
         );
-
+      case 1:
+        return HistoryScreen();
+      case 2:
+        return Muted();
       case 3:
-        return Center(
-          child: Text(
-            'Featured Content',
-            style: AppThemes.darkTheme.textTheme.bodyLarge,
-          ),
-        );
-
-      case 4:
-        return Center(
-          child: Text(
-            'Space Content',
-            style: AppThemes.darkTheme.textTheme.bodyLarge,
-          ),
-        );
-
+        return Suggestion();
       default:
         return Center(
           child: Text(
-            'Select an option',
+            'Following Content',
             style: AppThemes.darkTheme.textTheme.bodyLarge,
           ),
         );
@@ -92,36 +52,50 @@ class _AddScreenState extends State<AddScreen> {
       backgroundColor: AppThemes.darkTheme.scaffoldBackgroundColor,
       appBar: AppBar(
         backgroundColor: AppThemes.darkTheme.appBarTheme.backgroundColor,
-        leading:IconButton(onPressed:(){
-          Get.back();
-        }, icon:  Icon(
-          Icons.arrow_back,
-          color: AppThemes.darkTheme.appBarTheme.iconTheme?.color,
-        ),),
+        leading: IconButton(
+          onPressed: () {
+            Get.back();
+          },
+          icon: Icon(
+            Icons.arrow_back,
+            color: AppThemes.darkTheme.appBarTheme.iconTheme?.color,
+          ),
+        ),
         title: Text(
-          'Add Screen',
+          'Refine Recommendations',
           style: AppThemes.darkTheme.textTheme.displayLarge?.copyWith(
-            fontSize: 20,
+            fontSize: 18,
           ),
         ),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 4.0), // Reduced vertical padding
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              "Adjust recommendations by uploading content what you're following, your reading history, and who you're muted",
+              style: AppThemes.darkTheme.textTheme.displaySmall,
+            ),
+          ),
+          SizedBox(height: 20),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 4.0),
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  tabbutton(0, 'Add'),
-                  tabbutton(1, 'For You'),
-                  tabbutton(2, 'Following'),
-                  tabbutton(3, 'Featured'),
-                  tabbutton(4, 'Space'),
+                  tabbutton(0, 'Following'),
+                  tabbutton(1, 'Reading History'),
+                  tabbutton(2, 'Muted'),
+                  tabbutton(3, 'Suggestions'),
                 ],
               ),
             ),
+          ),
+          Divider(
+            thickness: 0.2,
+            color: AppThemes.darkTheme.dividerColor,
           ),
           Expanded(
             child: contentoftabbar(),
@@ -146,15 +120,16 @@ class _AddScreenState extends State<AddScreen> {
             color: selectindex == index
                 ? AppThemes.darkTheme.tabBarTheme.labelColor
                 : AppThemes.darkTheme.tabBarTheme.unselectedLabelColor,
-            fontWeight: selectindex == index ? FontWeight.w600 : FontWeight.w400,
+            fontWeight:
+                selectindex == index ? FontWeight.w600 : FontWeight.w400,
           ),
         ),
         style: TextButton.styleFrom(
           backgroundColor: selectindex == index
               ? AppThemes.darkTheme.cardColor?.withOpacity(0.1)
               : Colors.transparent,
-          elevation: 0, // Removed elevation for a flatter look
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8), // Reduced padding
+          elevation: 0,
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         ),
       ),
     );
