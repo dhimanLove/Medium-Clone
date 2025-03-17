@@ -108,7 +108,18 @@ class _ForYouState extends State<ForYou> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      child: ListView.builder(
+    child:
+        RefreshIndicator(
+          onRefresh: () async {
+            Get.snackbar(
+              'Hello',
+              'Refreshed',
+              dismissDirection: DismissDirection.horizontal,
+              isDismissible: true,
+            );
+            return Future.delayed(const Duration(seconds: 1));
+          },
+          child: ListView.builder(
         padding: const EdgeInsets.all(16),
         itemCount: posts.length,
         itemBuilder: (context, index) {
@@ -298,6 +309,7 @@ class _ForYouState extends State<ForYou> {
           );
         },
       ),
+    ),
     );
   }
 }

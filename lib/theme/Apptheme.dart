@@ -11,27 +11,27 @@ class AppThemes {
       elevation: 0,
       iconTheme: IconThemeData(color: Color(0xFF1A1A1A)),
     ),
-    cardTheme: CardTheme(
+    cardTheme: const CardTheme(
       color: Color(0xFF1A1A1A),
     ),
     textTheme: TextTheme(
       displayLarge: GoogleFonts.roboto(
-        color: Color(0xFF1A1A1A),
+        color: const Color(0xFF1A1A1A),
         fontSize: 26,
         fontWeight: FontWeight.w700,
       ),
       bodyLarge: GoogleFonts.roboto(
-        color: Color(0xFF1A1A1A),
+        color: const Color(0xFF1A1A1A),
         fontSize: 16,
         fontWeight: FontWeight.w600,
       ),
       bodyMedium: GoogleFonts.roboto(
-        color: Color(0xFF1A1A1A),
+        color: const Color(0xFF1A1A1A),
         fontSize: 14,
         fontWeight: FontWeight.w400,
       ),
       labelLarge: GoogleFonts.roboto(
-        color: Color(0xFF1A1A1A),
+        color: const Color(0xFF1A1A1A),
         fontSize: 14,
         fontWeight: FontWeight.w600,
       ),
@@ -39,11 +39,11 @@ class AppThemes {
     tabBarTheme: TabBarTheme(
       indicatorColor: Colors.white70,
       indicatorSize: TabBarIndicatorSize.tab,
-      labelColor: Color(0xFF1A1A1A),
+      labelColor: const Color(0xFF1A1A1A),
       unselectedLabelColor: Colors.grey[600],
       labelStyle: GoogleFonts.roboto(fontSize: 14, fontWeight: FontWeight.w600),
       unselectedLabelStyle:
-          GoogleFonts.roboto(fontSize: 13, fontWeight: FontWeight.w400),
+      GoogleFonts.roboto(fontSize: 13, fontWeight: FontWeight.w400),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
@@ -64,10 +64,18 @@ class AppThemes {
         borderSide: BorderSide.none,
       ),
     ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: Colors.white,
+      selectedItemColor: const Color(0xFF1A1A1A),
+      unselectedItemColor: Colors.grey[600],
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
+      type: BottomNavigationBarType.fixed,
+    ),
   );
 
   static ThemeData darkTheme = ThemeData.dark().copyWith(
-    scaffoldBackgroundColor: Color(0xFF1A1A1A),
+    scaffoldBackgroundColor: const Color(0xFF1A1A1A),
     cardColor: Colors.grey[900],
     appBarTheme: const AppBarTheme(
       backgroundColor: Color(0xFF1A1A1A),
@@ -104,12 +112,11 @@ class AppThemes {
       unselectedLabelColor: Colors.grey[600],
       labelStyle: GoogleFonts.roboto(fontSize: 14, fontWeight: FontWeight.w600),
       unselectedLabelStyle:
-          GoogleFonts.roboto(fontSize: 13, fontWeight: FontWeight.w400),
+      GoogleFonts.roboto(fontSize: 13, fontWeight: FontWeight.w400),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         backgroundColor: const Color(0xFF3C3C3C),
-        //visualDensity: const VisualDensity(horizontal: 0, vertical: 0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),
@@ -125,6 +132,14 @@ class AppThemes {
         borderRadius: BorderRadius.circular(12),
         borderSide: BorderSide.none,
       ),
+    ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: const Color(0xFF3F3F3F),
+      selectedItemColor: Colors.white,
+      unselectedItemColor: Colors.grey[600],
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
+      type: BottomNavigationBarType.fixed,
     ),
   );
 }
