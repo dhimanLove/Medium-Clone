@@ -30,6 +30,11 @@ class AppThemes {
         fontSize: 14,
         fontWeight: FontWeight.w400,
       ),
+      bodySmall: GoogleFonts.roboto(
+        color: const Color(0xFF1A1A1A),
+        fontSize: 12,
+        fontWeight: FontWeight.w300,
+      ),
       labelLarge: GoogleFonts.roboto(
         color: const Color(0xFF1A1A1A),
         fontSize: 14,
@@ -72,6 +77,10 @@ class AppThemes {
       showUnselectedLabels: false,
       type: BottomNavigationBarType.fixed,
     ),
+    switchTheme: SwitchThemeData(
+      trackColor: MaterialStateProperty.all(Colors.grey[300]),
+      thumbColor: MaterialStateProperty.all(Colors.blue),
+    ),
   );
 
   static ThemeData darkTheme = ThemeData.dark().copyWith(
@@ -98,6 +107,11 @@ class AppThemes {
         color: Colors.grey[400],
         fontSize: 14,
         fontWeight: FontWeight.w400,
+      ),
+      bodySmall: GoogleFonts.roboto(
+        color: Colors.grey[400],
+        fontSize: 12,
+        fontWeight: FontWeight.w300,
       ),
       labelLarge: GoogleFonts.roboto(
         color: Colors.white,
@@ -140,6 +154,10 @@ class AppThemes {
       showSelectedLabels: false,
       showUnselectedLabels: false,
       type: BottomNavigationBarType.fixed,
+    ),
+    switchTheme: SwitchThemeData(
+      trackColor: WidgetStatePropertyAll(Colors.grey[700]),
+      thumbColor: WidgetStateProperty.all(Colors.blueAccent),
     ),
   );
 }

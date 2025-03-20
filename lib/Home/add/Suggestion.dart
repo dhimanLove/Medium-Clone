@@ -11,7 +11,7 @@ class Suggestion extends StatefulWidget {
 
 class _SuggestionState extends State<Suggestion> {
   String? selectedValue = 'Topics';
-  final List<Map<String, dynamic>> topics = [
+  final List topics = [
     {
       'name': 'Writing',
       'stories': '972K stories',

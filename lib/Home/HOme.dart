@@ -306,7 +306,8 @@ class HomeScreenState extends State<HomeScreen> {
           child: SizedBox(
             height: MediaQuery.of(context).size.height,
             child: SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
+              physics: BouncingScrollPhysics(
+              ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

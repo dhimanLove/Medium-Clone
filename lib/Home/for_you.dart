@@ -110,6 +110,9 @@ class _ForYouState extends State<ForYou> {
     return SizedBox(
     child:
         RefreshIndicator(
+          elevation: 5,
+          backgroundColor: Colors.white,
+          color: Colors.black,
           onRefresh: () async {
             Get.snackbar(
               'Hello',

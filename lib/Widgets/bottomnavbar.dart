@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mediumm/Home/Home.dart';
-import 'package:mediumm/Profile/Profi.dart';
+import 'package:mediumm/Profile/Profile.dart';
 import 'package:mediumm/Saved/Saved.dart';
 import 'package:mediumm/Search/Search.dart';
 import 'package:mediumm/Widgets/writing.dart';
@@ -20,7 +20,7 @@ class GoogleNavState extends State<GoogleNav> {
     HomeScreen(),
     Search(),
     Saved(),
-    Profile(),
+    ProfileScreen(),
   ];
 
   @override
